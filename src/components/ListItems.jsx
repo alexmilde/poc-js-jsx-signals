@@ -21,13 +21,14 @@ const ListItems = (props) => {
         todos: props.todos,
     }
 
-    const signlasToRerender = {
+    const signalsToRerender = {
         todos: props.todos,
     }
 
-    for (const key in signlasToRerender) {
-        signlasToRerender[key].subscribe((newValue) => {
-            document.getElementById(id).replaceWith(template(id, props, signals))
+    for (const key in signalsToRerender) {
+        signalsToRerender[key].subscribe((newValue) => {
+            // TODO: make shure if component is rerenderd that old signals are destroyed
+            document.getElementById(id)?.replaceWith(template(id, props, signals))
         })
     }
 

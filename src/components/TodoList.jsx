@@ -28,12 +28,12 @@ const TodoList = (props) => {
         todos,
     }
 
-    const signlasToRerender = {
+    const signalsToRerender = {
         headline,
     }
 
-    for (const key in signlasToRerender) {
-        signlasToRerender[key].subscribe((newValue) => {
+    for (const key in signalsToRerender) {
+        signalsToRerender[key].subscribe((newValue) => {
             document.getElementById(id).replaceWith(template(id, props, signals))
         })
     }

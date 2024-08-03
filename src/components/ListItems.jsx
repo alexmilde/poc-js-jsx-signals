@@ -15,7 +15,7 @@ const template = (id, props, { todos }) => {
 }
 
 const ListItems = (props) => {
-    const id = self.crypto.randomUUID()
+    const id = "ListItems"
 
     const signals = {
         todos: props.todos,
@@ -27,9 +27,8 @@ const ListItems = (props) => {
 
     for (const key in signalsToRerender) {
         signalsToRerender[key].subscribe((newValue) => {
-            // TODO: make shure if component is rerenderd that old signals are destroyed
             document.getElementById(id)?.replaceWith(template(id, props, signals))
-        })
+        },id)
     }
 
     return template(id, props, signals)

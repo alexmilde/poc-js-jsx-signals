@@ -1,10 +1,10 @@
 export const createSignal = (initialValue) => {
     let _value = initialValue
-    let subscribers = []
+    let subscribers = {}
 
     function notify() {
-        for (let subscriber of subscribers) {
-            subscriber(_value)
+        for (const key in subscribers) {
+            subscribers[key](_value)
         }
     }
 
@@ -16,8 +16,12 @@ export const createSignal = (initialValue) => {
             _value = v
             notify()
         },
-        subscribe: (subscriber) => {
-            subscribers.push(subscriber)
+        // passing an id will overwrite listeners
+        // usefull when dom element is removed
+        // otherwise the listener would still be there
+        // but there might be a better solution for this issue
+        subscribe: (subscriber,id = self.crypto.randomUUID()) => {
+            subscribers[id] = subscriber
         },
     }
 }

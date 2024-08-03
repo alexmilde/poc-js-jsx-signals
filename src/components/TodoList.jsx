@@ -32,6 +32,10 @@ const TodoList = (props) => {
         headline,
     }
 
+    todos.subscribe((newValue) => {
+        console.log("TODOS HAVE NEW VALUE")
+    })
+
     for (const key in signalsToRerender) {
         signalsToRerender[key].subscribe((newValue) => {
             document.getElementById(id).replaceWith(template(id, props, signals))
